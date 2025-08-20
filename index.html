@@ -75,7 +75,6 @@
         .main-content {
             position: fixed;
             top: 80px;
-            left: 60px; /* Yeni sidebar genişliğine göre ayarlandı */
             right: 0;
             bottom: 40px;
             display: flex;
@@ -131,18 +130,18 @@
             top: 80px;
             left: 0;
             bottom: 40px;
-            width: 60px; /* Genişlik 60px'e artırıldı */
             background-color: #FF69B4;
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Roboto', sans-serif;
-            font-size: 28px;
+            font-size: 20px;
             font-weight: 900;
             writing-mode: vertical-rl;
             text-orientation: mixed;
             z-index: 2;
+            padding: 0 2px;
         }
         
         .typing-cursor {
@@ -172,28 +171,15 @@
             align-items: center;
         }
         
-        .ticker-static-info {
-            background-color: #E74C3C;
-            color: white;
-            padding: 0 15px;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            font-weight: bold;
-            flex-shrink: 0;
-            font-family: 'Roboto', sans-serif;
-            font-size: 16px;
-        }
-
         .ticker-content {
             display: flex;
             animation: scroll-left 60s linear infinite;
             white-space: nowrap;
-            padding-left: 20px;
+            padding-left: 30px; /* Kenar boşluğu artırıldı */
         }
-
+        
         .news-item {
-            margin-right: 80px;
+            margin-right: 120px; /* Haberler arası boşluk artırıldı */
             font-size: 14px;
             font-weight: 500;
             font-family: 'Roboto', sans-serif;
@@ -214,13 +200,12 @@
                 padding: 10px;
             }
             .sidebar-ticker {
-                width: 40px; /* Mobil ekranlar için daha dar bir genişlik */
-                font-size: 20px;
+                font-size: 18px;
             }
             .main-content {
                 left: 40px;
             }
-            .header-logo, .header-gif-group img, .ticker-static-info {
+            .header-logo, .header-gif-group img {
                 height: 40px;
             }
             .header-gif-group {
@@ -249,7 +234,7 @@
             .header {
                 padding: 10px 0;
             }
-            .header-logo, .header-gif-group img, .ticker-static-info {
+            .header-logo, .header-gif-group img {
                 height: 35px;
             }
             .member-counter {
@@ -285,7 +270,7 @@
                     <a href="https://forms.gle/1LEB9vm6Q6GFZPnu7">
                         <img src="https://img.webme.com/pic/p/piriketseverler/reklamalani7.gif" alt="Reklam Alanı">
                     </a>
-                    <a href="https://forms.gle/1LEB9vm6Q6GFZPnu7">
+                    <a href="">
                         <img src="https://r.resimlink.com/QI-JX.png" alt="Yeni Resim">
                     </a>
                     <a href="https://forms.gle/1LEB9vm6Q6GFZPnu7">
@@ -315,49 +300,38 @@
         </main>
 
         <div class="news-ticker">
-            <div class="ticker-static-info" id="ticker-clock"></div>
             <div class="ticker-content">
-                <span class="news-item">Mobil arayüzde olan side tabs sorunu giderildi. [14.11.2024]</span>
-                <span class="news-item">Twitch canlı yayın entegrasyonu eklendi. [14.11.2024]</span>
-                <span class="news-item">Sesli odadan çıkış problemi giderildi, odadan çıkış eklendi. [19.11.2024]</span>
-                <span class="news-item">YouTube video gönderisi sorunu güncellendi. [19.11.2024]</span>
-                <span class="news-item">YouTube canlı yayın entegrasyonu eklendi. [19.11.2024]</span>
-                <span class="news-item">Sunucuda kimler aktif eklendi. [20.11.2024]</span>
-                <span class="news-item">Sunucu logosu değiştirme eklendi. [21.11.2024]</span>
-                <span class="news-item">Kullanıcı isim, nick, foto değiştirme eklendi. [23.11.2024]</span>
-                <span class="news-item">Odaya birisi girdiğinde bip sesi eklendi. [25.11.2024]</span>
-                <span class="news-item">Değiştirilebilir sunucu arka planı eklendi. [25.11.2024]</span>
-                <span class="news-item">Sunucudaki aktif kişilerin görülmesi eklendi. [28.11.2024]</span>
-                <span class="news-item">Sunucuya ve profile hareketli gif eklenebiliyor. [01.12.2024]</span>
-                <span class="news-item">Ses botu eklendi. [04.12.2024]</span>
-                <span class="news-item">Popüler kanallar algoritması değiştirildi. [06.12.2024]</span>
-                <span class="news-item">Sesli odalarda ses seviyesini değiştirme eklendi. [09.12.2024]</span>
-                <span class="news-item">Canlı mesajlaşma eklendi. [13.12.2024]</span>
-                <span class="news-item">Sesli odalara radyo efektleri eklendi. [14.12.2024]</span>
-                <span class="news-item">Windows uygulamasının betası tamamlandı. [11.01.2025]</span>
-                <span class="news-item">Bozkurt Atak Koruma aracı kuruldu. [07.02.2025]</span>
-                <span class="news-item">Android Uygulama Play Store'da yayınlandı. [04.02.2025]</span>
-                <span class="news-item">Anasayfa Keşfet Algoritması güncellendi. [27.02.2025]</span>
-                <span class="news-item">Ve daha fazlası şu tık kaldırda!</span>
+                <span class="news-item">Mobil Arayüz Yan Sekme Sorunu Giderildi.</span>
+                <span class="news-item">Twitch Canlı Yayın Entegrasyonu Tamamlandı.</span>
+                <span class="news-item">Sesli Sohbet Odasından Çıkış Sorunu Çözüldü.</span>
+                <span class="news-item">YouTube Video Paylaşım Sorunu Güncellendi.</span>
+                <span class="news-item">YouTube Canlı Yayın Entegrasyonu Eklendi.</span>
+                <span class="news-item">Sunucudaki Aktif Kullanıcıları Görme Özelliği Eklendi.</span>
+                <span class="news-item">Sunucu Logo Değiştirme Özelliği Aktif Edildi.</span>
+                <span class="news-item">Kullanıcı İsim, Profil Fotoğrafı ve Nick Değişikliği Eklendi.</span>
+                <span class="news-item">Odaya Girişlerde Sesli Bildirim Eklendi.</span>
+                <span class="news-item">Sunucu Arka Planı Değiştirme Özelliği Eklendi.</span>
+                <span class="news-item">Sunucuya ve Profile Hareketli GIF Ekleme Özelliği Eklendi.</span>
+                <span class="news-item">Ses Botu Entegrasyonu Tamamlandı.</span>
+                <span class="news-item">Popüler Kanallar Algoritması Güncellendi.</span>
+                <span class="news-item">Sesli Odalarda Ses Seviyesini Değiştirme Özelliği Eklendi.</span>
+                <span class="news-item">Canlı Mesajlaşma Sistemi Eklendi.</span>
+                <span class="news-item">Sesli Odalara Radyo Efektleri Eklendi.</span>
+                <span class="news-item">Windows Uygulaması Beta Sürümü Tamamlandı.</span>
+                <span class="news-item">Bozkurt Atak Koruma Sistemi Kuruldu.</span>
+                <span class="news-item">Android Uygulamamız Google Play Store'da Yayınlandı.</span>
+                <span class="news-item">Anasayfa Keşfet Algoritması Güncellendi.</span>
             </div>
         </div>
     </div>
 
     <script>
-        function updateClock() {
-            const date = new Date();
-            const hours = date.getHours().toString().padStart(2, '0');
-            const minutes = date.getMinutes().toString().padStart(2, '0');
-            document.getElementById('ticker-clock').textContent = hours + ':' + minutes;
-        }
-
-        setInterval(updateClock, 60000);
-        updateClock();
-
+        let isLive = true;
         function checkLiveStream() {
-            const isLive = true;
             const liveStreamDiv = document.getElementById('live-stream');
             const memberCounterDiv = document.getElementById('member-counter');
+
+            isLive = !isLive;
 
             if (isLive) {
                 liveStreamDiv.classList.add('active');
@@ -371,7 +345,17 @@
         checkLiveStream();
         setInterval(checkLiveStream, 30000);
 
-        // Sürekli yazma ve silme efekti için JavaScript kodu
+        function adjustLayout() {
+            const sidebarTicker = document.getElementById('sidebar-ticker');
+            const mainContent = document.getElementById('main-content');
+            const newsTicker = document.querySelector('.news-ticker');
+            
+            const sidebarWidth = sidebarTicker.offsetWidth;
+
+            mainContent.style.left = `${sidebarWidth}px`;
+            newsTicker.style.paddingLeft = `${sidebarWidth}px`;
+        }
+
         const textToType = 'TOPLUYO HABER';
         const typingSpeed = 100;
         const erasingSpeed = 50;
@@ -389,6 +373,7 @@
                     currentText += textToType.charAt(textIndex);
                     sidebarTicker.innerHTML = currentText + cursor;
                     textIndex++;
+                    adjustLayout();
                     setTimeout(type, typingSpeed);
                 } else {
                     isTyping = false;
@@ -411,9 +396,7 @@
             }
         }
 
-        // Efekti başlat
         type();
-
     </script>
 </body>
 </html>
