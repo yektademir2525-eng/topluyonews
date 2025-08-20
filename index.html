@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TopluyoNews</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100vw;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            z-index: 10;
+            height: 80px;
+            box-sizing: border-box;
+        }
+
+        .header-content-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-content-right {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .header-logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .header-gif-group {
+            display: flex;
+            gap: 0;
+        }
+
+        .header-gif-group img {
+            height: 60px;
+            width: auto;
+        }
+
+        .main-content {
+            position: fixed;
+            top: 80px;
+            left: 60px; /* Yeni sidebar genişliğine göre ayarlandı */
+            right: 0;
+            bottom: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: black;
+            z-index: 1;
+        }
+
+        .live-stream, .member-counter {
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+        }
+
+        .live-stream.active, .member-counter.active {
+            display: flex;
+        }
+
+        .live-stream iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .member-counter {
+            border: none;
+            background: none;
+            padding: 0;
+            box-shadow: none;
+            text-align: center;
+        }
+
+        .member-counter h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 28px;
+        }
+
+        .member-count-display {
+            font-size: 48px;
+            font-weight: bold;
+            color: #4CAF50;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-ticker {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            bottom: 40px;
+            width: 60px; /* Genişlik 60px'e artırıldı */
+            background-color: #FF69B4;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Roboto', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            z-index: 2;
+        }
+        
+        .typing-cursor {
+            font-size: 1.2em;
+            vertical-align: top;
+            animation: blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes blink-caret {
+            from, to { color: transparent; }
+            50% { color: white; }
+        }
+
+        .news-ticker {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            color: black;
+            padding: 8px 0;
+            overflow: hidden;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            height: 40px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+        }
+        
+        .ticker-static-info {
+            background-color: #E74C3C;
+            color: white;
+            padding: 0 15px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+        }
+
+        .ticker-content {
+            display: flex;
+            animation: scroll-left 60s linear infinite;
+            white-space: nowrap;
+            padding-left: 20px;
+        }
+
+        .news-item {
+            margin-right: 80px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'Roboto', sans-serif;
+            color: #444;
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .sidebar-ticker {
+                width: 40px; /* Mobil ekranlar için daha dar bir genişlik */
+                font-size: 20px;
+            }
+            .main-content {
+                left: 40px;
+            }
+            .header-logo, .header-gif-group img, .ticker-static-info {
+                height: 40px;
+            }
+            .header-gif-group {
+                gap: 0;
+            }
+            .member-counter {
+                padding: 25px 15px;
+            }
+            .member-counter h2 {
+                font-size: 20px;
+            }
+            .member-count-display {
+                font-size: 32px;
+            }
+            .news-item {
+                font-size: 12px;
+                margin-right: 40px;
+            }
+            .news-ticker {
+                height: 35px;
+                padding: 6px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 10px 0;
+            }
+            .header-logo, .header-gif-group img, .ticker-static-info {
+                height: 35px;
+            }
+            .member-counter {
+                padding: 20px 10px;
+            }
+            .member-counter h2 {
+                font-size: 18px;
+            }
+            .member-count-display {
+                font-size: 28px;
+            }
+            .news-ticker {
+                height: 32px;
+                padding: 5px 0;
+            }
+            .news-item {
+                font-size: 11px;
+                margin-right: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content-left">
+                <a href="https://forms.gle/1LEB9vm6Q6GFZPnu7">
+                    <img src="https://cdn.topluyo.com/kanka/kanka-color-solid.svg" alt="kanka logo" class="header-logo">
+                </a>
+            </div>
+            <div class="header-content-right">
+                <div class="header-gif-group">
+                    <a href="https://forms.gle/1LEB9vm6Q6GFZPnu7">
+                        <img src="https://img.webme.com/pic/p/piriketseverler/reklamalani7.gif" alt="Reklam Alanı">
+                    </a>
+                    <a href="https://forms.gle/1LEB9vm6Q6GFZPnu7">
+                        <img src="https://r.resimlink.com/QI-JX.png" alt="Yeni Resim">
+                    </a>
+                    <a href="https://forms.gle/1LEB9vm6Q6GFZPnu7">
+                        <img src="https://img.webme.com/pic/p/piriketseverler/reklamalani7.gif" alt="Yeni GIF">
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div class="sidebar-ticker" id="sidebar-ticker"></div>
+
+        <main class="main-content" id="main-content">
+            <div class="live-stream" id="live-stream">
+                <iframe 
+                    src="https://player.kick.com/efeerdogan?parent=topluyo.com" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    allowfullscreen="true">
+                </iframe>
+            </div>
+
+            <div class="member-counter" id="member-counter">
+                <iframe src="https://api.topluyo.com/member-count.php"
+                    style="border: none; width: 100%; height: 100%; background: transparent;">
+                </iframe>
+            </div>
+        </main>
+
+        <div class="news-ticker">
+            <div class="ticker-static-info" id="ticker-clock"></div>
+            <div class="ticker-content">
+                <span class="news-item">Mobil arayüzde olan side tabs sorunu giderildi. [14.11.2024]</span>
+                <span class="news-item">Twitch canlı yayın entegrasyonu eklendi. [14.11.2024]</span>
+                <span class="news-item">Sesli odadan çıkış problemi giderildi, odadan çıkış eklendi. [19.11.2024]</span>
+                <span class="news-item">YouTube video gönderisi sorunu güncellendi. [19.11.2024]</span>
+                <span class="news-item">YouTube canlı yayın entegrasyonu eklendi. [19.11.2024]</span>
+                <span class="news-item">Sunucuda kimler aktif eklendi. [20.11.2024]</span>
+                <span class="news-item">Sunucu logosu değiştirme eklendi. [21.11.2024]</span>
+                <span class="news-item">Kullanıcı isim, nick, foto değiştirme eklendi. [23.11.2024]</span>
+                <span class="news-item">Odaya birisi girdiğinde bip sesi eklendi. [25.11.2024]</span>
+                <span class="news-item">Değiştirilebilir sunucu arka planı eklendi. [25.11.2024]</span>
+                <span class="news-item">Sunucudaki aktif kişilerin görülmesi eklendi. [28.11.2024]</span>
+                <span class="news-item">Sunucuya ve profile hareketli gif eklenebiliyor. [01.12.2024]</span>
+                <span class="news-item">Ses botu eklendi. [04.12.2024]</span>
+                <span class="news-item">Popüler kanallar algoritması değiştirildi. [06.12.2024]</span>
+                <span class="news-item">Sesli odalarda ses seviyesini değiştirme eklendi. [09.12.2024]</span>
+                <span class="news-item">Canlı mesajlaşma eklendi. [13.12.2024]</span>
+                <span class="news-item">Sesli odalara radyo efektleri eklendi. [14.12.2024]</span>
+                <span class="news-item">Windows uygulamasının betası tamamlandı. [11.01.2025]</span>
+                <span class="news-item">Bozkurt Atak Koruma aracı kuruldu. [07.02.2025]</span>
+                <span class="news-item">Android Uygulama Play Store'da yayınlandı. [04.02.2025]</span>
+                <span class="news-item">Anasayfa Keşfet Algoritması güncellendi. [27.02.2025]</span>
+                <span class="news-item">Ve daha fazlası şu tık kaldırda!</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const date = new Date();
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            document.getElementById('ticker-clock').textContent = hours + ':' + minutes;
+        }
+
+        setInterval(updateClock, 60000);
+        updateClock();
+
+        function checkLiveStream() {
+            const isLive = true;
+            const liveStreamDiv = document.getElementById('live-stream');
+            const memberCounterDiv = document.getElementById('member-counter');
+
+            if (isLive) {
+                liveStreamDiv.classList.add('active');
+                memberCounterDiv.classList.remove('active');
+            } else {
+                liveStreamDiv.classList.remove('active');
+                memberCounterDiv.classList.add('active');
+            }
+        }
+        
+        checkLiveStream();
+        setInterval(checkLiveStream, 30000);
+
+        // Sürekli yazma ve silme efekti için JavaScript kodu
+        const textToType = 'TOPLUYO HABER';
+        const typingSpeed = 100;
+        const erasingSpeed = 50;
+        const pauseBeforeErase = 1500;
+        const pauseBeforeType = 500;
+        const sidebarTicker = document.getElementById('sidebar-ticker');
+        let textIndex = 0;
+        let isTyping = true;
+        let currentText = '';
+        let cursor = '<span class="typing-cursor">_</span>';
+
+        function type() {
+            if (isTyping) {
+                if (textIndex < textToType.length) {
+                    currentText += textToType.charAt(textIndex);
+                    sidebarTicker.innerHTML = currentText + cursor;
+                    textIndex++;
+                    setTimeout(type, typingSpeed);
+                } else {
+                    isTyping = false;
+                    setTimeout(erase, pauseBeforeErase);
+                }
+            }
+        }
+
+        function erase() {
+            if (!isTyping) {
+                if (currentText.length > 0) {
+                    currentText = currentText.slice(0, -1);
+                    sidebarTicker.innerHTML = currentText + cursor;
+                    setTimeout(erase, erasingSpeed);
+                } else {
+                    isTyping = true;
+                    textIndex = 0;
+                    setTimeout(type, pauseBeforeType);
+                }
+            }
+        }
+
+        // Efekti başlat
+        type();
+
+    </script>
+</body>
+</html>
