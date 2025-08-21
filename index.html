@@ -440,15 +440,6 @@
                     allowfullscreen="true">
                 </iframe>
             </div>
-<main class="main-content" id="main-content">
-            <div class="live-stream" id="live-stream">
-                <iframe 
-                    src="hhttps://player.kick.com/topluyo?parent=topluyo.com" 
-                    frameborder="0" 
-                    scrolling="no" 
-                    allowfullscreen="true">
-                </iframe>
-            </div>
 
             <div class="member-counter" id="member-counter">
                 <iframe src="https://api.topluyo.com/member-count.php"
@@ -493,9 +484,13 @@
         const toggleBtn = document.getElementById('toggle-btn');
         let isLiveStreamActive = true;
 
+        // Sayfa yüklendiğinde canlı yayını göster, üye sayacını gizle
+        liveStreamDiv.classList.add('active');
+        memberCounterDiv.classList.remove('active');
+
         function toggleView() {
             if (isLiveStreamActive) {
-                // Canlı yayını gizle aktif üyeleri
+                // Canlı yayını gizle, aktif üyeleri göster
                 liveStreamDiv.classList.remove('active');
                 memberCounterDiv.classList.add('active');
                 isLiveStreamActive = false;
@@ -509,14 +504,11 @@
 
         toggleBtn.addEventListener('click', toggleView);
 
-        // Sayfa yüklendiğinde  canlı yayını göster
-        toggleView();
-
         function adjustLayout() {
             const sidebarTicker = document.getElementById('sidebar-ticker');
             const mainContent = document.getElementById('main-content');
             const newsTicker = document.querySelector('.news-ticker');
-           
+            
             const sidebarWidth = sidebarTicker.offsetWidth;
 
             mainContent.style.left = `${sidebarWidth}px`;
