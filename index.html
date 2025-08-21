@@ -60,6 +60,11 @@
         .header-logo {
             height: 60px;
             width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .header-logo:hover {
+            transform: scale(1.1);
         }
 
         .header-gif-group {
@@ -70,6 +75,62 @@
         .header-gif-group img {
             height: 60px;
             width: auto;
+            transition: opacity 0.3s ease;
+        }
+
+        .header-gif-group img:hover {
+            opacity: 0.8;
+        }
+
+        /* Hava durumu widget */
+        .weather-widget {
+            position: fixed;
+            top: 90px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            z-index: 10;
+            min-width: 220px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .weather-location {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .weather-temp {
+            font-size: 32px;
+            font-weight: 900;
+            color: #4CAF50;
+            margin: 10px 0;
+        }
+
+        .weather-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .weather-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #777;
+        }
+
+        .weather-detail-item {
+            text-align: center;
+        }
+
+        .weather-detail-value {
+            font-weight: bold;
+            color: #333;
         }
 
         .main-content {
@@ -143,13 +204,13 @@
             z-index: 2;
             padding: 0 2px;
         }
-        
+    
         .typing-cursor {
             font-size: 1.2em;
             vertical-align: top;
             animation: blink-caret 0.75s step-end infinite;
         }
-        
+    
         @keyframes blink-caret {
             from, to { color: transparent; }
             50% { color: white; }
@@ -170,20 +231,105 @@
             display: flex;
             align-items: center;
         }
-        
+    
         .ticker-content {
             display: flex;
             animation: scroll-left 60s linear infinite;
             white-space: nowrap;
-            padding-left: 30px; /* Kenar boşluğu artırıldı */
+            padding-left: 30px;
         }
-        
+    
         .news-item {
-            margin-right: 120px; /* Haberler arası boşluk artırıldı */
+            margin-right: 120px;
             font-size: 14px;
             font-weight: 500;
             font-family: 'Roboto', sans-serif;
             color: #444;
+        }
+
+        /* Yeni özellik: İnternet bağlantı durumu */
+        .connection-status {
+            position: fixed;
+            top: 90px;
+            right: 250px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .connection-status.online {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .connection-status.offline {
+            background: #f44336;
+            color: white;
+            animation: pulse 1s infinite;
+        }
+
+        /* Yeni özellik: Saat ve tarih */
+        .datetime-display {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 10;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .time {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .date {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Kontrol paneli */
+        .control-panel {
+            position: fixed;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            padding: 10px;
+            border-radius: 25px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .control-btn {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: white;
+            color: black;
+        }
+
+        .control-btn.active {
+            background: #4CAF50;
+            border-color: #4CAF50;
         }
 
         @keyframes scroll-left {
@@ -228,6 +374,9 @@
                 height: 35px;
                 padding: 6px 0;
             }
+            .stats-panel, .datetime-display {
+                display: none;
+            }
         }
 
         @media (max-width: 480px) {
@@ -270,7 +419,7 @@
                     <a href="https://forms.gle/1LEB9vm6Q6GFZPnu7">
                         <img src="https://img.webme.com/pic/p/piriketseverler/reklamalani7.gif" alt="Reklam Alanı">
                     </a>
-                    <a href="">
+                    <a href="https://forms.gle/1LEB9vm6Q6GFZPnu7">
                         <img src="https://r.resimlink.com/QI-JX.png" alt="Yeni Resim">
                     </a>
                     <a href="https://forms.gle/1LEB9vm6Q6GFZPnu7">
@@ -286,6 +435,15 @@
             <div class="live-stream" id="live-stream">
                 <iframe 
                     src="https://player.kick.com/efeerdogan?parent=topluyo.com" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    allowfullscreen="true">
+                </iframe>
+            </div>
+<main class="main-content" id="main-content">
+            <div class="live-stream" id="live-stream">
+                <iframe 
+                    src="hhttps://player.kick.com/topluyo?parent=topluyo.com" 
                     frameborder="0" 
                     scrolling="no" 
                     allowfullscreen="true">
@@ -324,32 +482,41 @@
             </div>
         </div>
     </div>
+    
+    <div class="control-panel">
+        <button class="control-btn" id="toggle-btn">Değiştir</button>
+    </div>
 
     <script>
-        let isLive = true;
-        function checkLiveStream() {
-            const liveStreamDiv = document.getElementById('live-stream');
-            const memberCounterDiv = document.getElementById('member-counter');
+        const liveStreamDiv = document.getElementById('live-stream');
+        const memberCounterDiv = document.getElementById('member-counter');
+        const toggleBtn = document.getElementById('toggle-btn');
+        let isLiveStreamActive = true;
 
-            isLive = !isLive;
-
-            if (isLive) {
-                liveStreamDiv.classList.add('active');
-                memberCounterDiv.classList.remove('active');
-            } else {
+        function toggleView() {
+            if (isLiveStreamActive) {
+                // Canlı yayını gizle aktif üyeleri
                 liveStreamDiv.classList.remove('active');
                 memberCounterDiv.classList.add('active');
+                isLiveStreamActive = false;
+            } else {
+                // Aktif üyeleri gizle, canlı yayını göster
+                memberCounterDiv.classList.remove('active');
+                liveStreamDiv.classList.add('active');
+                isLiveStreamActive = true;
             }
         }
-        
-        checkLiveStream();
-        setInterval(checkLiveStream, 30000);
+
+        toggleBtn.addEventListener('click', toggleView);
+
+        // Sayfa yüklendiğinde  canlı yayını göster
+        toggleView();
 
         function adjustLayout() {
             const sidebarTicker = document.getElementById('sidebar-ticker');
             const mainContent = document.getElementById('main-content');
             const newsTicker = document.querySelector('.news-ticker');
-            
+           
             const sidebarWidth = sidebarTicker.offsetWidth;
 
             mainContent.style.left = `${sidebarWidth}px`;
