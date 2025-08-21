@@ -13,7 +13,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             background-color: #f5f5f5;
@@ -21,7 +20,6 @@
             line-height: 1.6;
             overflow: hidden;
         }
-
         .container {
             width: 100vw;
             padding: 0;
@@ -29,7 +27,6 @@
             display: flex;
             flex-direction: column;
         }
-
         .header {
             position: fixed;
             top: 0;
@@ -37,52 +34,42 @@
             right: 0;
             background: #f5f5f5;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end; /* İçeriği sağa yasladık */
             align-items: center;
             padding: 20px;
             z-index: 10;
             height: 80px;
             box-sizing: border-box;
         }
-
         .header-content-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            display: none; /* Logo'yu başlık kısmından kaldırdık */
         }
-
         .header-content-right {
             display: flex;
             align-items: center;
             gap: 0;
         }
-
         .header-logo {
             height: 60px;
             width: auto;
             transition: transform 0.3s ease;
         }
-
         .header-logo:hover {
             transform: scale(1.1);
         }
-
         .header-gif-group {
             display: flex;
-            gap: 0;
+            gap: 10px; /* Boşluğu 20px'den 10px'e düşürdük */
+            justify-content: flex-end; /* GIF grubunu sağa yasladık */
         }
-
         .header-gif-group img {
             height: 60px;
             width: auto;
             transition: opacity 0.3s ease;
         }
-
         .header-gif-group img:hover {
             opacity: 0.8;
         }
-
-        /* Hava durumu widget */
         .weather-widget {
             position: fixed;
             top: 90px;
@@ -96,56 +83,55 @@
             backdrop-filter: blur(10px);
             text-align: center;
         }
-
         .weather-location {
             font-size: 16px;
             font-weight: bold;
             color: #333;
             margin-bottom: 10px;
         }
-
         .weather-temp {
             font-size: 32px;
             font-weight: 900;
             color: #4CAF50;
             margin: 10px 0;
         }
-
         .weather-desc {
             font-size: 14px;
             color: #666;
             margin-bottom: 15px;
         }
-
         .weather-details {
             display: flex;
             justify-content: space-between;
             font-size: 12px;
             color: #777;
         }
-
         .weather-detail-item {
             text-align: center;
         }
-
         .weather-detail-value {
             font-weight: bold;
             color: #333;
         }
-
         .main-content {
             position: fixed;
             top: 80px;
             right: 0;
             bottom: 40px;
+            left: 0; /* Sol kenara da yasladık */
             display: flex;
             justify-content: center;
             align-items: center;
             background: black;
             z-index: 1;
         }
-
-        .live-stream, .member-counter {
+        .kanka-logo-corner {
+            position: absolute; /* Ana içeriğin içinde konumlandırmak için */
+            top: 20px;
+            right: 20px;
+            z-index: 5; /* Diğer içeriklerin üzerinde kalması için */
+        }
+        .live-stream, .member-counter, .topluyo-stream {
             width: 100%;
             height: 100%;
             display: none;
@@ -153,31 +139,27 @@
             align-items: center;
             background-color: black;
         }
-
-        .live-stream.active, .member-counter.active {
+        .live-stream.active, .member-counter.active, .topluyo-stream.active {
             display: flex;
         }
-
-        .live-stream iframe {
+        .live-stream iframe, .topluyo-stream iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
-
         .member-counter {
             border: none;
-            background: none;
+            background: black;
             padding: 0;
             box-shadow: none;
             text-align: center;
+            color: white;
         }
-
         .member-counter h2 {
             margin-bottom: 20px;
-            color: #333;
+            color: white;
             font-size: 28px;
         }
-
         .member-count-display {
             font-size: 48px;
             font-weight: bold;
@@ -185,7 +167,6 @@
             margin: 20px 0;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
-
         .sidebar-ticker {
             position: fixed;
             top: 80px;
@@ -204,18 +185,15 @@
             z-index: 2;
             padding: 0 2px;
         }
-    
         .typing-cursor {
             font-size: 1.2em;
             vertical-align: top;
             animation: blink-caret 0.75s step-end infinite;
         }
-    
         @keyframes blink-caret {
             from, to { color: transparent; }
             50% { color: white; }
         }
-
         .news-ticker {
             position: fixed;
             bottom: 0;
@@ -231,14 +209,12 @@
             display: flex;
             align-items: center;
         }
-    
         .ticker-content {
             display: flex;
             animation: scroll-left 60s linear infinite;
             white-space: nowrap;
             padding-left: 30px;
         }
-    
         .news-item {
             margin-right: 120px;
             font-size: 14px;
@@ -246,8 +222,6 @@
             font-family: 'Roboto', sans-serif;
             color: #444;
         }
-
-        /* Yeni özellik: İnternet bağlantı durumu */
         .connection-status {
             position: fixed;
             top: 90px;
@@ -259,19 +233,15 @@
             z-index: 100;
             transition: all 0.3s ease;
         }
-
         .connection-status.online {
             background: #4CAF50;
             color: white;
         }
-
         .connection-status.offline {
             background: #f44336;
             color: white;
             animation: pulse 1s infinite;
         }
-
-        /* Yeni özellik: Saat ve tarih */
         .datetime-display {
             position: fixed;
             top: 90px;
@@ -284,20 +254,16 @@
             text-align: center;
             backdrop-filter: blur(10px);
         }
-
         .time {
             font-size: 18px;
             font-weight: bold;
             color: #333;
         }
-
         .date {
             font-size: 12px;
             color: #666;
             margin-top: 5px;
         }
-
-        /* Kontrol paneli */
         .control-panel {
             position: fixed;
             bottom: 50px;
@@ -310,7 +276,6 @@
             gap: 10px;
             z-index: 100;
         }
-
         .control-btn {
             background: transparent;
             border: 2px solid white;
@@ -321,17 +286,14 @@
             font-size: 12px;
             transition: all 0.3s ease;
         }
-
         .control-btn:hover {
             background: white;
             color: black;
         }
-
         .control-btn.active {
             background: #4CAF50;
             border-color: #4CAF50;
         }
-
         @keyframes scroll-left {
             0% {
                 transform: translateX(0%);
@@ -340,7 +302,6 @@
                 transform: translateX(-100%);
             }
         }
-
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
@@ -378,7 +339,6 @@
                 display: none;
             }
         }
-
         @media (max-width: 480px) {
             .header {
                 padding: 10px 0;
@@ -409,11 +369,6 @@
 <body>
     <div class="container">
         <header class="header">
-            <div class="header-content-left">
-                <a href="https://forms.gle/1LEB9vm6Q6GFZPnu7">
-                    <img src="https://cdn.topluyo.com/kanka/kanka-color-solid.svg" alt="kanka logo" class="header-logo">
-                </a>
-            </div>
             <div class="header-content-right">
                 <div class="header-gif-group">
                     <a href="https://forms.gle/1LEB9vm6Q6GFZPnu7">
@@ -432,13 +387,18 @@
         <div class="sidebar-ticker" id="sidebar-ticker"></div>
 
         <main class="main-content" id="main-content">
-            <div class="live-stream" id="live-stream">
-                <iframe 
-                    src="https://player.kick.com/efeerdogan?parent=topluyo.com" 
-                    frameborder="0" 
-                    scrolling="no" 
-                    allowfullscreen="true">
-                </iframe>
+            <div class="kanka-logo-corner">
+                <a href="https://forms.gle/1LEB9vm6Q6GFZPnu7">
+                    <img src="https://cdn.topluyo.com/kanka/kanka-color-solid.svg" alt="kanka logo" class="header-logo">
+                </a>
+            </div>
+
+            <div class="live-stream" id="efeerdogan-stream">
+                <iframe src="https://player.kick.com/efeerdogan?parent=topluyo.com" frameborder="0" scrolling="no" allowfullscreen="true"></iframe>
+            </div>
+
+            <div class="topluyo-stream" id="topluyo-stream">
+                <iframe src="https://player.kick.com/topluyo?parent=topluyo.com" frameborder="0" scrolling="no" allowfullscreen="true"></iframe>
             </div>
 
             <div class="member-counter" id="member-counter">
@@ -479,42 +439,44 @@
     </div>
 
     <script>
-        const liveStreamDiv = document.getElementById('live-stream');
+        const efeerdoganStreamDiv = document.getElementById('efeerdogan-stream');
+        const topluyoStreamDiv = document.getElementById('topluyo-stream');
         const memberCounterDiv = document.getElementById('member-counter');
         const toggleBtn = document.getElementById('toggle-btn');
-        let isLiveStreamActive = true;
-
-        // Sayfa yüklendiğinde canlı yayını göster, üye sayacını gizle
-        liveStreamDiv.classList.add('active');
-        memberCounterDiv.classList.remove('active');
+        
+        let currentState = 0; // 0: efeerdogan, 1: topluyo, 2: member-counter
 
         function toggleView() {
-            if (isLiveStreamActive) {
-                // Canlı yayını gizle, aktif üyeleri göster
-                liveStreamDiv.classList.remove('active');
+            efeerdoganStreamDiv.classList.remove('active');
+            topluyoStreamDiv.classList.remove('active');
+            memberCounterDiv.classList.remove('active');
+
+            if (currentState === 0) {
+                topluyoStreamDiv.classList.add('active');
+            } else if (currentState === 1) {
                 memberCounterDiv.classList.add('active');
-                isLiveStreamActive = false;
             } else {
-                // Aktif üyeleri gizle, canlı yayını göster
-                memberCounterDiv.classList.remove('active');
-                liveStreamDiv.classList.add('active');
-                isLiveStreamActive = true;
+                efeerdoganStreamDiv.classList.add('active');
             }
+
+            currentState = (currentState + 1) % 3;
         }
 
         toggleBtn.addEventListener('click', toggleView);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            efeerdoganStreamDiv.classList.add('active');
+        });
 
         function adjustLayout() {
             const sidebarTicker = document.getElementById('sidebar-ticker');
             const mainContent = document.getElementById('main-content');
             const newsTicker = document.querySelector('.news-ticker');
-            
             const sidebarWidth = sidebarTicker.offsetWidth;
-
             mainContent.style.left = `${sidebarWidth}px`;
             newsTicker.style.paddingLeft = `${sidebarWidth}px`;
         }
-
+        
         const textToType = 'TOPLUYO HABER';
         const typingSpeed = 100;
         const erasingSpeed = 50;
@@ -554,7 +516,7 @@
                 }
             }
         }
-
+        
         type();
     </script>
 </body>
